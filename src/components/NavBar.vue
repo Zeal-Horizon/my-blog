@@ -6,7 +6,7 @@
     </router-link>
     <div class="nav-links">
       <router-link to="/" exact-active-class="active-link">文章</router-link>
-      <a href="https://github.com/user" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/Zeal-Horizon" target="_blank" rel="noopener">GitHub</a>
     </div>
   </nav>
 </template>

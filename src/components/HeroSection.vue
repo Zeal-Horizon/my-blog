@@ -35,41 +35,15 @@
       </div>
 
       <div class="author-media">
-        <div class="hero-animation">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="anim-svg">
-            <defs>
-              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#0052FF"/>
-                <stop offset="100%" stop-color="#00C9FF"/>
-              </linearGradient>
-            </defs>
-            <circle cx="100" cy="100" r="80" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.3">
-              <animate attributeName="r" values="80;85;80" dur="4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="100" cy="100" r="55" fill="none" stroke="url(#g1)" stroke-width="1" opacity="0.2">
-              <animate attributeName="r" values="55;60;55" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="100" cy="100" r="30" fill="url(#g1)" opacity="0.08">
-              <animate attributeName="r" values="30;35;30" dur="5s" repeatCount="indefinite"/>
-            </circle>
-            <g opacity="0.15">
-              <circle cx="100" cy="30" r="4" fill="#0052FF">
-                <animate attributeName="cy" values="30;170;30" dur="10s" repeatCount="indefinite"/>
-                <animate attributeName="opacity" values="1;0.3;1" dur="10s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="60" cy="50" r="3" fill="#00C9FF">
-                <animate attributeName="cy" values="50;160;50" dur="8s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="140" cy="40" r="3" fill="#0052FF">
-                <animate attributeName="cy" values="40;170;40" dur="12s" repeatCount="indefinite"/>
-              </circle>
-            </g>
-          </svg>
-        </div>
+        <LottieGallery />
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import LottieGallery from './LottieGallery.vue'
+</script>
 
 <style scoped>
 .author-section {
@@ -197,17 +171,6 @@
   font-weight: 500;
 }
 
-/* Animated SVG */
-.hero-animation {
-  width: 100%;
-  max-width: 200px;
-}
-
-.anim-svg {
-  width: 100%;
-  height: auto;
-}
-
 @media (max-width: 960px) {
   .author-main {
     flex-direction: column;
@@ -227,6 +190,5 @@
   .author-name { font-size: 1.6rem; }
   .author-bio { font-size: 0.95rem; }
   .author-avatar { width: 44px; height: 44px; font-size: 0.9rem; }
-  .hero-animation { max-width: 140px; }
 }
 </style>

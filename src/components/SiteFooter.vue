@@ -2,7 +2,7 @@
   <footer class="footer">
     <span>&copy; 2025 ZH · 个人博客</span>
     <div class="footer-links">
-      <a href="https://github.com/user" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/Zeal-Horizon" target="_blank" rel="noopener">GitHub</a>
       <a href="mailto:zeal.horizon@example.com">邮件</a>
     </div>
   </footer>
