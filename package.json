@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/build-posts.js && vite build",
+    "generate": "node scripts/build-posts.js && node scripts/build-animations.js",
+    "dev": "node scripts/build-posts.js && node scripts/build-animations.js && vite",
+    "build": "node scripts/build-posts.js && node scripts/build-animations.js && vite build",
     "preview": "vite preview",
-    "build:posts": "node scripts/build-posts.js"
+    "build:posts": "node scripts/build-posts.js",
+    "build:animations": "node scripts/build-animations.js"
   },
   "dependencies": {
     "lottie-web": "^5.13.0",

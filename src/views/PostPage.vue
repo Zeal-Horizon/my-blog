@@ -29,12 +29,7 @@
       </article>
 
       <div class="article-right">
-        <div class="sidebar-block">
-          <h3 class="sidebar-title">标签</h3>
-          <div class="sidebar-tags" v-if="post.tags && post.tags.length">
-            <span v-for="tag in post.tags" :key="tag" class="sidebar-tag">{{ tag }}</span>
-          </div>
-        </div>
+        <ArticleSidebar :post="post" />
       </div>
     </div>
   </div>
@@ -44,6 +39,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import TableOfContents from '../components/TableOfContents.vue'
+import ArticleSidebar from '../components/ArticleSidebar.vue'
 import postsData from '../data/posts.json?url'
 
 const route = useRoute()
@@ -158,31 +154,6 @@ function formatDate(dateStr) {
 }
 
 .meta-tag {
-  font-size: 0.75rem;
-  color: var(--accent);
-  font-weight: 500;
-  background: var(--accent-subtle);
-  padding: 4px 10px;
-  border-radius: 2px;
-}
-
-/* Sidebar */
-.sidebar-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-
-.sidebar-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.sidebar-tag {
   font-size: 0.75rem;
   color: var(--accent);
   font-weight: 500;

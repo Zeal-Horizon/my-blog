@@ -4,28 +4,25 @@
 
     <div class="content-layout">
       <div class="content-main">
-        <div class="section-header">
-          <h2 class="section-title">文章目录</h2>
-          <span class="section-count">{{ filteredPosts.length }} 篇</span>
-        </div>
+        <div class="article-list-wrapper" v-if="filteredPosts.length">
+          <div class="section-header">
+            <h2 class="section-title">文章目录</h2>
+            <span class="section-count">{{ filteredPosts.length }} 篇</span>
+          </div>
 
-        <!-- Category Tabs -->
-        <div class="category-tabs" v-if="categories.length">
-          <button
-            v-for="cat in categories"
-            :key="cat.name"
-            class="cat-tab"
-            :class="{ active: activeCategory === cat.name }"
-            @click="toggleCategory(cat.name)"
-          >
-            {{ cat.name }}
-            <span class="cat-count">{{ cat.count }}</span>
-          </button>
-        </div>
+          <div class="category-tabs" v-if="categories.length">
+            <button
+              v-for="cat in categories"
+              :key="cat.name"
+              class="cat-tab"
+              :class="{ active: activeCategory === cat.name }"
+              @click="toggleCategory(cat.name)"
+            >
+              {{ cat.name }}
+              <span class="cat-count">{{ cat.count }}</span>
+            </button>
+          </div>
 
-        <div v-if="loading" class="loading-state">加载中...</div>
-        <div v-else-if="filteredPosts.length === 0" class="loading-state">暂无文章</div>
-        <div v-else class="article-list-wrapper">
           <div class="article-list">
             <ArticleCard v-for="post in filteredPosts" :key="post.slug" :post="post" />
           </div>
@@ -34,6 +31,7 @@
 
       <aside class="content-side">
         <TagCloud :posts="posts" :activeTag="activeCategory" @update:activeTag="activeCategory = $event" />
+        <CalendarWidget :postDates="postDates" />
       </aside>
     </div>
   </div>
@@ -44,10 +42,10 @@ import { ref, computed, onMounted } from 'vue'
 import HeroSection from '../components/HeroSection.vue'
 import ArticleCard from '../components/ArticleCard.vue'
 import TagCloud from '../components/TagCloud.vue'
+import CalendarWidget from '../components/CalendarWidget.vue'
 import postsData from '../data/posts.json?url'
 
 const posts = ref([])
-const loading = ref(true)
 const activeCategory = ref('')
 
 onMounted(async () => {
@@ -56,26 +54,26 @@ onMounted(async () => {
     posts.value = await res.json()
   } catch {
     posts.value = []
-  } finally {
-    loading.value = false
   }
 })
 
 const categories = computed(() => {
   const catMap = {}
   posts.value.forEach(p => {
-    (p.tags || []).forEach(t => {
-      catMap[t] = (catMap[t] || 0) + 1
-    })
+    if (p.category) {
+      catMap[p.category] = (catMap[p.category] || 0) + 1
+    }
   })
   return Object.entries(catMap)
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count)
 })
 
+const postDates = computed(() => posts.value.map(p => p.date).filter(Boolean))
+
 const filteredPosts = computed(() => {
   if (!activeCategory.value) return posts.value
-  return posts.value.filter(p => (p.tags || []).includes(activeCategory.value))
+  return posts.value.filter(p => p.category === activeCategory.value)
 })
 
 function toggleCategory(name) {
@@ -109,7 +107,9 @@ function toggleCategory(name) {
   font-weight: 500;
 }
 
-/* Category Tabs */
+.content-side {
+}
+
 .category-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -161,17 +161,6 @@ function toggleCategory(name) {
 .article-list {
   display: flex;
   flex-direction: column;
-}
-
-.content-side {
-  padding-top: 38px;
-}
-
-.loading-state {
-  text-align: center;
-  padding: 48px 0;
-  color: var(--text-tertiary);
-  font-size: 0.95rem;
 }
 
 @media (max-width: 768px) {

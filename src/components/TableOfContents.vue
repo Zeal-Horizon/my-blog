@@ -48,7 +48,11 @@ onMounted(() => setTimeout(extract, 300))
   top: 40px;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
-  padding-right: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
 .toc-title {
@@ -58,17 +62,18 @@ onMounted(() => setTimeout(extract, 300))
   color: var(--text-muted);
   text-transform: uppercase;
   margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .toc-list {
   list-style: none;
-  padding: 0;
+  padding: 0 0 8px 16px;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
   border-left: 1px solid var(--border-color);
-  padding-left: 16px;
 }
 
 .toc-item { line-height: 1.4; }

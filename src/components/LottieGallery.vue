@@ -1,15 +1,6 @@
 <template>
   <div class="lottie-gallery" @click="nextAnimation">
     <div ref="container" class="lottie-container"></div>
-    <div class="gallery-indicator">
-      <span
-        v-for="(_, i) in animations"
-        :key="i"
-        class="dot"
-        :class="{ active: currentIndex === i }"
-      ></span>
-    </div>
-    <p class="gallery-hint">点击切换</p>
   </div>
 </template>
 
@@ -17,12 +8,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import lottie from 'lottie-web'
 
-const animations = [
-  '/my-blog/animations/pulse.json',
-  '/my-blog/animations/bounce.json',
-  '/my-blog/animations/spin.json',
-]
-
+const animations = ref([])
 const currentIndex = ref(0)
 const container = ref(null)
 let animInstance = null
@@ -32,26 +18,36 @@ function loadAnimation(index) {
     animInstance.destroy()
     animInstance = null
   }
-  if (!container.value) return
+  if (!container.value || !animations.value.length) return
   animInstance = lottie.loadAnimation({
     container: container.value,
     renderer: 'svg',
     loop: true,
     autoplay: true,
-    path: animations[index],
+    path: animations.value[index],
   })
 }
 
 function nextAnimation() {
-  currentIndex.value = (currentIndex.value + 1) % animations.length
+  if (!animations.value.length) return
+  currentIndex.value = (currentIndex.value + 1) % animations.value.length
 }
 
 watch(currentIndex, (idx) => {
   loadAnimation(idx)
 })
 
-onMounted(() => {
-  loadAnimation(0)
+onMounted(async () => {
+  try {
+    const res = await fetch('/my-blog/src/data/animations.json')
+    const files = await res.json()
+    animations.value = files.map(f => '/my-blog/images/' + encodeURIComponent(f))
+  } catch {
+    animations.value = []
+  }
+  if (animations.value.length > 0) {
+    loadAnimation(0)
+  }
 })
 
 onUnmounted(() => {
@@ -82,32 +78,6 @@ onUnmounted(() => {
 .lottie-container :deep(svg) {
   width: 100%;
   height: 100%;
-}
-
-.gallery-indicator {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--border-strong);
-  transition: all 0.3s;
-}
-
-.dot.active {
-  width: 20px;
-  border-radius: 3px;
-  background: var(--accent);
-}
-
-.gallery-hint {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.4px;
 }
 
 @media (max-width: 960px) {

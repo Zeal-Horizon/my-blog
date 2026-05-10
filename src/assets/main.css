@@ -66,3 +66,128 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 /* ===== Transitions ===== */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.2s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
+
+/* ===== Article Content Styles ===== */
+.article-content {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--text-primary);
+}
+
+.article-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: -0.02em;
+}
+
+.article-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  letter-spacing: -0.01em;
+}
+
+.article-content p {
+  margin-bottom: 16px;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.article-content li {
+  margin-bottom: 6px;
+}
+
+.article-content strong {
+  font-weight: 700;
+}
+
+.article-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.article-content a:hover {
+  color: var(--accent-hover);
+}
+
+/* Code blocks - framed with background */
+.article-content pre {
+  background: #0D1117;
+  color: #E6EDF3;
+  padding: 20px 24px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 20px 0 24px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  border: 1px solid #30363D;
+  position: relative;
+}
+
+.article-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: inherit;
+  tab-size: 2;
+}
+
+.article-content :not(pre) > code {
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-size: 0.85em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  border: 1px solid rgba(0, 82, 255, 0.1);
+}
+
+.article-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 8px 16px;
+  margin: 16px 0;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border-radius: 0 8px 8px 0;
+}
+
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9rem;
+}
+
+.article-content th,
+.article-content td {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.article-content th {
+  background: var(--bg-card);
+  font-weight: 600;
+}
+
+.article-content img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+  border: 1px solid var(--border-color);
+}
+
+.article-content hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 32px 0;
+}
