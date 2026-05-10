@@ -12,6 +12,7 @@
     "build:animations": "node scripts/build-animations.js"
   },
   "dependencies": {
+    "adm-zip": "^0.5.17",
     "lottie-web": "^5.13.0",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0"
