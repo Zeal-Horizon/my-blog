@@ -39,7 +39,7 @@ watch(currentIndex, (idx) => {
 
 onMounted(async () => {
   try {
-    const res = await fetch('/my-blog/src/data/animations.json')
+    const res = await fetch('/my-blog/data/animations.json')
     const files = await res.json()
     animations.value = files.map(f => '/my-blog/images/' + encodeURIComponent(f))
   } catch {

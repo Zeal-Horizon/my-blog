@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const IMAGES_DIR = path.resolve('public/images')
-const OUTPUT_DIR = path.resolve('src/data')
+const OUTPUT_DIR = path.resolve('public/data')
 
 const files = fs.readdirSync(IMAGES_DIR)
   .filter(f => f.endsWith('.json'))
