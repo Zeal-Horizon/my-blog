@@ -2,7 +2,7 @@
   <nav class="nav">
     <router-link to="/" class="logo-area">
       <span class="logo-mark">Z</span>
-      <span class="logo-text">Zeal_Horizon</span>
+      <span class="logo-text">ZH</span>
     </router-link>
     <div class="nav-links">
       <router-link to="/" exact-active-class="active-link">文章</router-link>

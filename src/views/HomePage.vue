@@ -9,6 +9,20 @@
           <span class="section-count">{{ filteredPosts.length }} 篇</span>
         </div>
 
+        <!-- Category Tabs -->
+        <div class="category-tabs" v-if="categories.length">
+          <button
+            v-for="cat in categories"
+            :key="cat.name"
+            class="cat-tab"
+            :class="{ active: activeCategory === cat.name }"
+            @click="toggleCategory(cat.name)"
+          >
+            {{ cat.name }}
+            <span class="cat-count">{{ cat.count }}</span>
+          </button>
+        </div>
+
         <div v-if="loading" class="loading-state">加载中...</div>
         <div v-else-if="filteredPosts.length === 0" class="loading-state">暂无文章</div>
         <div v-else class="article-list-wrapper">
@@ -19,7 +33,7 @@
       </div>
 
       <aside class="content-side">
-        <TagCloud :posts="posts" :activeTag="activeTag" @update:activeTag="activeTag = $event" />
+        <TagCloud :posts="posts" :activeTag="activeCategory" @update:activeTag="activeCategory = $event" />
       </aside>
     </div>
   </div>
@@ -34,7 +48,7 @@ import postsData from '../data/posts.json?url'
 
 const posts = ref([])
 const loading = ref(true)
-const activeTag = ref('')
+const activeCategory = ref('')
 
 onMounted(async () => {
   try {
@@ -47,10 +61,26 @@ onMounted(async () => {
   }
 })
 
-const filteredPosts = computed(() => {
-  if (!activeTag.value) return posts.value
-  return posts.value.filter(p => (p.tags || []).includes(activeTag.value))
+const categories = computed(() => {
+  const catMap = {}
+  posts.value.forEach(p => {
+    (p.tags || []).forEach(t => {
+      catMap[t] = (catMap[t] || 0) + 1
+    })
+  })
+  return Object.entries(catMap)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count)
 })
+
+const filteredPosts = computed(() => {
+  if (!activeCategory.value) return posts.value
+  return posts.value.filter(p => (p.tags || []).includes(activeCategory.value))
+})
+
+function toggleCategory(name) {
+  activeCategory.value = activeCategory.value === name ? '' : name
+}
 </script>
 
 <style scoped>
@@ -77,6 +107,47 @@ const filteredPosts = computed(() => {
   font-size: 0.85rem;
   color: var(--text-tertiary);
   font-weight: 500;
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.cat-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.cat-tab:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.cat-tab.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.cat-count {
+  font-size: 0.7rem;
+  opacity: 0.7;
 }
 
 .article-list-wrapper {
@@ -114,6 +185,13 @@ const filteredPosts = computed(() => {
   }
   .article-list-wrapper {
     padding: 20px;
+  }
+  .category-tabs {
+    gap: 6px;
+  }
+  .cat-tab {
+    padding: 4px 12px;
+    font-size: 0.75rem;
   }
 }
 </style>

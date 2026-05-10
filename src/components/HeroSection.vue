@@ -6,7 +6,8 @@
           <div class="author-avatar">Z</div>
           <div class="author-headline">
             <span class="author-label">个人博客</span>
-            <h1 class="author-name">Zeal_Horizon</h1>
+            <h1 class="author-name">ZH</h1>
+            <p class="author-subtitle">竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。</p>
           </div>
         </div>
 
@@ -100,7 +101,7 @@
 
 .author-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   margin-bottom: 24px;
 }
@@ -123,6 +124,15 @@
   display: flex;
   flex-direction: column;
   gap: 3px;
+}
+
+.author-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  margin-top: 2px;
+  font-style: italic;
 }
 
 .author-label {
