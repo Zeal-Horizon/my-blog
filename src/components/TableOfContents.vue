@@ -61,7 +61,7 @@ onMounted(() => setTimeout(extract, 300))
   letter-spacing: 0.1em;
   color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border-color);
 }
@@ -76,7 +76,17 @@ onMounted(() => setTimeout(extract, 300))
   border-left: 1px solid var(--border-color);
 }
 
-.toc-item { line-height: 1.4; }
+.toc-item {
+  line-height: 1.4;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.toc-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
 .toc-level-3 { padding-left: 10px; }
 
 .toc-link {

@@ -92,6 +92,8 @@ const days = computed(() => {
   color: var(--text-muted);
   text-transform: uppercase;
   margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .calendar { font-size: 0.8rem; }
