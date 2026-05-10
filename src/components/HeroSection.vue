@@ -11,7 +11,7 @@
         </div>
 
         <p class="author-bio">
-          嵌入式开发工程师，十年从单片机到 Linux 系统的实践经验。
+          嵌入式软开工程师，练习时常3年，从单片机到 Linux 系统的实践经验。
           热爱技术写作与开源分享，关注嵌入式、后端架构与前端探索。
         </p>
 
@@ -22,7 +22,7 @@
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
-            <span class="stat-value">10</span>
+            <span class="stat-value">3</span>
             <span class="stat-label">年经验</span>
           </div>
           <div class="stat-divider"></div>
