@@ -9,7 +9,7 @@
           <div class="author-headline">
             <span class="author-label">个人博客</span>
             <h1 class="author-name">ZH</h1>
-            <p class="author-subtitle">竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。</p>
+            <p class="author-subtitle">惟江上之清风，与山间之明月。</p>
           </div>
         </div>
 
